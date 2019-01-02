@@ -1,2 +1,0 @@
-# WatchAndLearn
-Searching teacher app

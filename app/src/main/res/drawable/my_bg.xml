@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:duration="4500" android:drawable="@drawable/pi"/>
+
+</animation-list>
