@@ -73,6 +73,9 @@ public class teacher_page extends AppCompatActivity implements View.OnClickListe
 
             db.child("Teachers").child(user.getEmail().replace(".", "|")).setValue(user);
             db.child("Users").child(user.getEmail().replace(".", "|")).setValue(user);
+            for(String s:user.getProfession()){
+                db.child("Subjects").child(s).child(user.getEmail().replace(".", "|")).setValue(user);
+            }
 
 
         }

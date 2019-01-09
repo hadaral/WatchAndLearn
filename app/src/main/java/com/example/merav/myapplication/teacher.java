@@ -1,5 +1,8 @@
 package com.example.merav.myapplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class teacher extends users {
 
     protected float rank;
@@ -7,23 +10,25 @@ public class teacher extends users {
     protected String area;
     protected String area_lower;
     protected String cost;
-    protected String profession;
-    protected String profession_lower;
+    protected List <String> profession=new ArrayList<>();
+    protected String[]profession_lower;
     protected String phone;
     protected String image="https://firebasestorage.googleapis.com/v0/b/lessonsapp-37d29.appspot.com/o/WhatsApp%20Image%202018-12-19%20at%2012.33.35.jpeg?alt=media&token=971c0893-0593-4bd0-a94b-2f904cb9c0be";
-    public teacher( String Mail ,String password, String name, String age, String area, String cost, String profession,String phone,float rank){
+    public teacher( String Mail ,String password, String name, String age, String area, String cost, String []profession,String phone,float rank){
         this.age=age;
         this.email=Mail;
         this.name=name;
         this.password=password;
         this.area=area;
         this.cost=cost;
-        this.profession=profession;
+        for(String s:profession){
+            this.profession.add(s);
+        }
         this.phone=phone;
         this.rank=rank;
         this.type="teacher";
         this.area_lower = area.toLowerCase()+"   ";
-        this.profession_lower = profession.toLowerCase()+"   ";
+       // this.profession_lower = profession.toLowerCase()+"   ";
         this.name_lower = name.toLowerCase()+"   ";
     }
     public teacher(){}
@@ -69,13 +74,21 @@ public class teacher extends users {
         this.cost = cost;
     }
 
-    public String getProfession() {
+
+    public List<String> getProfession() {
         return profession;
     }
 
-    public void setProfession(String profession) {
+    public void setProfession(List<String> profession) {
         this.profession = profession;
-        this.profession_lower = profession.toLowerCase();
+    }
+
+    public String[] getProfession_lower() {
+        return profession_lower;
+    }
+
+    public void setProfession_lower(String[] profession_lower) {
+        this.profession_lower = profession_lower;
     }
 
     public String getImage() {

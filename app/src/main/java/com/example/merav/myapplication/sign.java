@@ -21,10 +21,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 public class sign extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth auth;
-    String spinnerSelectedItem = "Student";
+    String spinnerSelectedItem = "Student", profession_t;
     EditText passwords, passwordt, Names,Namet, emails,emailt, ages,aget,areat,costt,professiont,phonet;
     Button ok_t,ok_s;
     LinearLayout t_layout,s_layout;
@@ -116,11 +119,11 @@ public class sign extends AppCompatActivity implements View.OnClickListener {
                 String age_t = aget.getText().toString();
                 String area_t = areat.getText().toString();
                 String cost_t = costt.getText().toString();
-                String profession_t = professiont.getText().toString();
+                profession_t = professiont.getText().toString();
                 String phone_t = phonet.getText().toString();
                 if (!checkempty_t(pass_t, name_t, Mail_t, age_t, area_t,cost_t,profession_t,phone_t))
                     return;
-                user = new teacher(Mail_t,pass_t, name_t,  age_t, area_t,cost_t,profession_t,phone_t,0);
+                user = new teacher(Mail_t,pass_t, name_t,  age_t, area_t,cost_t,profession_t.split(","),phone_t,0);
             } else {
                 String pass_s = passwords.getText().toString();
                 String name_s = Names.getText().toString();
@@ -140,6 +143,8 @@ public class sign extends AppCompatActivity implements View.OnClickListener {
                                 if (user instanceof teacher) {
                                     db.child("Users").child(user.getEmail().replace(".", "|")).setValue(user);
                                     db.child("Teachers").child(user.getEmail().replace(".", "|")).setValue(user);
+                                    for(String subject: profession_t.split(","))
+                                    db.child("Subjects").child(subject).child(user.getEmail().replace(".", "|")).setValue(user);
                                 }
                                 else{
                                     db.child("Users").child(user.getEmail().replace(".", "|")).setValue(user);

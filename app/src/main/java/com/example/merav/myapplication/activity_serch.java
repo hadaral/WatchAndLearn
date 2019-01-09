@@ -72,6 +72,7 @@ public class activity_serch extends AppCompatActivity {
 //    RadioButton area;
 
     private DatabaseReference teacher_database;
+    private DatabaseReference subject;
 
     private RecyclerView mResultList;
 
@@ -94,6 +95,7 @@ public class activity_serch extends AppCompatActivity {
         animationDrawable.start();
 
         teacher_database=FirebaseDatabase.getInstance().getReference("Teachers");
+        subject=FirebaseDatabase.getInstance().getReference("Subjects");
 
         addListenerOnButton();
     }
@@ -142,7 +144,7 @@ public class activity_serch extends AppCompatActivity {
                         } else if (selectedId == radio_by_price.getId()) {
                             searchForTeacher(textEntered, "cost");
                         } else if (selectedId == radio_by_profession.getId()) {
-                            searchForTeacher(textEntered, "profession_lower");
+                            searchForTeacher(textEntered, "profession");
                         } else if (selectedId == radio_by_area.getId()) {
                             searchForTeacher(textEntered, "area_lower");
                         }
@@ -258,7 +260,13 @@ public class activity_serch extends AppCompatActivity {
 
     private void searchForTeacher(String textEntered, String choice) {
         final ArrayList<teacher> mList_teachers = new ArrayList<teacher>();
-        Query firebaseSearchQuery = teacher_database.orderByChild(choice).startAt(textEntered.toLowerCase()).endAt(textEntered.toLowerCase()+'~');
+        Query firebaseSearchQuery;
+        if(choice=="profession") {
+            //choice = "Subjects";
+           firebaseSearchQuery = subject.child(textEntered);
+        }else {
+            firebaseSearchQuery = teacher_database.orderByChild(choice).startAt(textEntered.toLowerCase()).endAt(textEntered.toLowerCase() + '~');
+        }
         firebaseSearchQuery.addValueEventListener(new ValueEventListener() {
 
             @Override

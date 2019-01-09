@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import static android.support.v4.content.ContextCompat.startActivity;
 
 public class ViewHolder extends RecyclerView.ViewHolder{
@@ -23,7 +25,7 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         v = itemView;
     }
 
-    public void setdetails (final Context c, final teacher model ,String name, String profession, String area, String image, float rank){
+    public void setdetails (final Context c, final teacher model , String name, List<String>profession, String area, String image, float rank){
         TextView data = v.findViewById(R.id.data);
         ImageView imageV = v.findViewById(R.id.image);
         Button button = v.findViewById(R.id.bn);
@@ -38,7 +40,7 @@ public class ViewHolder extends RecyclerView.ViewHolder{
 
         RatingBar ratingBar = v.findViewById(R.id.ratingBar);
         data.setText("Name: " + name + '\n' +
-                "Profession: " + profession + '\n' +
+                "Profession: " + profession.toString() + '\n' +
                 "Area: " + area + '\n');
         ratingBar.setIsIndicator(true);
         ratingBar.setRating(rank);

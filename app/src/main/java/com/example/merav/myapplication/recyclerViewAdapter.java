@@ -55,7 +55,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
 //        viewHolder.subject.setText();
         viewHolder.area.setText("I am teaching at: "+te.getArea()+"\n"+
                 "I can teach you: "+te.getProfession());
-        viewHolder.reting.setRating(te.rank);
+        viewHolder.reting.setRating(te.getRank());
         if(!te.getImage().isEmpty())
             Picasso.get().load(te.getImage()).into(viewHolder.image);
         else
